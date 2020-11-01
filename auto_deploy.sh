@@ -30,14 +30,14 @@ OLD_FILE_COUNT=$(ls ${APP_HOME}/${SERVICE_NAME}*.jar 2> /dev/null | grep -v "$DE
 CONTAINER_ID=$(docker ps -af ancestor=${IMAGE_NAME}:${VERSION} --format "{{.ID}}")
 IMAGE_ID=$(docker images -f=reference=${IMAGE_NAME}':*' --format "{{.ID}}")
 
-# check_param()
-# {
-#   # 인자값 개수($#) 1보다 작으면, 스크립트 사용법을 출력하고 종료.
-#   if [[ "$#" -lt 1 ]]; then
-#     echo "Usage: $0 $DEPLOY_FILE"
-#     exit 1
-#   fi
-# }
+check_param()
+{
+  # 인자값 개수($#) 1보다 작으면, 스크립트 사용법을 출력하고 종료.
+  if [[ "$#" -lt 1 ]]; then
+    echo "Usage: $0 $DEPLOY_FILE"
+    exit 1
+  fi
+}
 
 check_dir()
 {
@@ -122,8 +122,7 @@ docker_conainer_start()
 
 main()
 {
-  # change dir to APP_HOME으로 이동
-  if [[ -x $(basename $0) ]];then
+  if [[ -x $(basename $0) ]];then   # 스크립트가 실행가능한 상태인지 체크
     cd ${APP_HOME} >& /dev/null || { echo "[Cannot cd to ${APP_HOME}]"; exit 1; }
     check_dir && check_app || { echo "[Failed check dir and check app]"; exit 1; }
     remove_old_file
@@ -131,9 +130,9 @@ main()
     docker_image_build && docker_conainer_start || { echo "[cannot build image and start container ]"; exit 1; }
     rm $DEPLOY_FILE && echo "[ Successfully docker build and run ]"
   else
-    echo "failed"
+    echo "Cannot run a $(basename $0)"
     exit 1
   fi
 }
 
-main
+check_param "$@" && main
