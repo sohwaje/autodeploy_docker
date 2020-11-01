@@ -1,5 +1,5 @@
 # 소스 도커 자동적용 및 자동 컨테이너 시작 스크립트
-# ./auto_apply.sh
+# ./auto_deploy.sh
 
 ## 배포할 파일(.jar, .war)
 DEPLOY_FILE="simplewebserver.jar"
