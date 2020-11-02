@@ -10,8 +10,7 @@ APP_HOME="/home/azureuser/apps/api"
 VERSION="lts"
 # 프로파일 이름(ex:stage,dev,pro)
 SPRING_PROFILE="stage"
-## Tag
-VERSION="lts"
+
 # 프로파일 이름(ex:stage,dev,pro)
 SPRING_PROFILE="stage"
 
