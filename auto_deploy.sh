@@ -11,9 +11,6 @@ VERSION="lts"
 # 프로파일 이름(ex:stage,dev,pro)
 SPRING_PROFILE="stage"
 
-# 프로파일 이름(ex:stage,dev,pro)
-SPRING_PROFILE="stage"
-
 # 대문자 파일 이름을 소문자로 변경(docker tag를 실행하려면 파일명이 소문자여야만 한다.)
 to_lowercase() {
   local input="$([[ -p /dev/stdin ]] && cat - || echo "$@")"
