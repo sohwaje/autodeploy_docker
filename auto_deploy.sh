@@ -143,6 +143,7 @@ main()
 {
   if [[ -x $(basename $0) ]];then   # 스크립트가 실행가능한 상태인지 체크
     check_dir && check_app || { echo "[Failed check dir and check app]"; exit 1; }
+    mv -ar ${DEPLOY_FILE} ${APP_HOME} || { echo "[Cannot copy ${DEPLOY_FILE}]"; exit 1; }
     cd ${APP_HOME} >& /dev/null || { echo "[Cannot cd to ${APP_HOME}]"; exit 1; }
     remove_old_file
     docker_conainer_stop_remove && docker_image_remove || { echo "[cannot stop container and remove image ]"; exit 1; }
