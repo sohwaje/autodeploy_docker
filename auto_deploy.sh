@@ -142,8 +142,8 @@ docker_conainer_start()
 main()
 {
   if [[ -x $(basename $0) ]];then   # 스크립트가 실행가능한 상태인지 체크
-    cd ${APP_HOME} >& /dev/null || { echo "[Cannot cd to ${APP_HOME}]"; exit 1; }
     check_dir && check_app || { echo "[Failed check dir and check app]"; exit 1; }
+    cd ${APP_HOME} >& /dev/null || { echo "[Cannot cd to ${APP_HOME}]"; exit 1; }
     remove_old_file
     docker_conainer_stop_remove && docker_image_remove || { echo "[cannot stop container and remove image ]"; exit 1; }
     docker_image_build && docker_conainer_start || { echo "[cannot build image and start container ]"; exit 1; }
