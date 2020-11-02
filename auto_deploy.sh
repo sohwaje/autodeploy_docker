@@ -1,40 +1,60 @@
 # 소스 도커 자동적용 및 자동 컨테이너 시작 스크립트
 # ./auto_deploy.sh
 
-## 배포할 파일(.jar, .war)
-DEPLOY_FILE="simplewebserver.jar"
-
-## SERVICE 명(jar 파일 이름 앞자리와 동일해야함)
-SERVICE_NAME="simplewebserver"
-
+## 컨테이너 포트 설정
+HOST_PORT=19999
+CONTAINER_PORT=19999
+## app 홈디렉토리(log 및 heapdump 디렉토리 생성 위치)
+APP_HOME="/home/azureuser/apps/api"
+## 이미지 Tag
+VERSION="lts"
+# 프로파일 이름(ex:stage,dev,pro)
+SPRING_PROFILE="stage"
+## Tag
+VERSION="lts"
+# 프로파일 이름(ex:stage,dev,pro)
 SPRING_PROFILE="stage"
 
-## 외부에 제공되는 포트
-HOST_PORT=80
-CONTAINER_PORT=80
+# 대문자 파일 이름을 소문자로 변경(docker tag를 실행하려면 파일명이 소문자여야만 한다.)
+to_lowercase() {
+  local input="$([[ -p /dev/stdin ]] && cat - || echo "$@")"
+  [[ -z "$input" ]] && return 1
+  echo "$input" | tr '[:upper:]' '[:lower:]'
+}
 
-## Tag 버전명
-VERSION="lts"
-## IMAGE 명
-IMAGE_NAME="${SERVICE_NAME}-${SPRING_PROFILE}"
+variable_func()
+{
+  # 파일명에서 확장자를 제거한 문자열을 서비스 이름으로 사용.
+  SERVICE_NAME=$(echo ${DEPLOY_FILE%.*})
+  # 이미지 이름
+  IMAGE_NAME="${SERVICE_NAME}-${SPRING_PROFILE}"
+  # old 배포 파일 관련 변수(도커 배포 시 오래된 소스 파일은 삭제한다.)
+  OLD_FILE=$(ls -1 ${APP_HOME}/${SERVICE_NAME}*.jar 2> /dev/null | grep -v "$DEPLOY_FILE") # 디렉토리의 파일 이름 목록을 배열에 저장 (ls -1)
+  OLD_FILE_COUNT=$(ls ${APP_HOME}/${SERVICE_NAME}*.jar 2> /dev/null | grep -v "$DEPLOY_FILE" | wc -l)
+  # 도커 관련 변수
+  CONTAINER_ID=$(docker ps -af ancestor=${IMAGE_NAME}:${VERSION} --format "{{.ID}}")
+  IMAGE_ID=$(docker images -f=reference=${IMAGE_NAME}':*' --format "{{.ID}}")
+}
 
-## app 파일 위치 및 app 이름
-APP_HOME="/home/azureuser/apps"
-APP_NAME="${SERVICE_NAME}.jar"
-
-# old 배포 파일 관련 변수
-OLD_FILE=$(ls -1 ${APP_HOME}/${SERVICE_NAME}*.jar 2> /dev/null | grep -v "$DEPLOY_FILE") # 디렉토리의 파일 이름 목록을 배열에 저장 (ls -1)
-OLD_FILE_COUNT=$(ls ${APP_HOME}/${SERVICE_NAME}*.jar 2> /dev/null | grep -v "$DEPLOY_FILE" | wc -l)
-
-# 도커 관련 변수
-CONTAINER_ID=$(docker ps -af ancestor=${IMAGE_NAME}:${VERSION} --format "{{.ID}}")
-IMAGE_ID=$(docker images -f=reference=${IMAGE_NAME}':*' --format "{{.ID}}")
+lowercase_deploy_file()
+{
+  ## app 파일명 추출
+  DEPLOY_FILE=$(basename $APP_HOME/*.jar)
+  local FILE=$(to_lowercase $DEPLOY_FILE) # 파일명을 소문자로 변경
+  if [[ $FILE != $DEPLOY_FILE ]];then     # 소문자로 변경한 파일과 원래 배포하려는 파일이 동일한지 비교
+    mv $DEPLOY_FILE $(to_lowercase $DEPLOY_FILE)  # 파일이 대문자이면 소문자로 변경
+    DEPLOY_FILE=$(basename $APP_HOME/*.jar)       # 변경된 파일을 $DEPLOY_FILE 변수에 저장
+    variable_func
+  else
+    variable_func
+  fi
+}
 
 check_param()
 {
   # 인자값 개수($#) 1보다 작으면, 스크립트 사용법을 출력하고 종료.
   if [[ "$#" -lt 1 ]]; then
-    echo "Usage: $0 $DEPLOY_FILE"
+    echo "Usage: $0 filenname"
     exit 1
   fi
 }
@@ -50,7 +70,7 @@ check_dir()
 check_app()
 {
   # 배포할 파일, 배포할 파일의 디렉토리 생성 유무 확인
-  if [[ -f ${APP_HOME}/${APP_NAME} ]];then
+  if [[ -f ${APP_HOME}/${DEPLOY_FILE} ]];then
     return 0
   else
     echo "$DEPLOY_FILE dose not exist in $APP_HOME"
@@ -103,7 +123,7 @@ docker_image_remove()
 docker_image_build()
 {
   echo "Docker build"
-  docker build --build-arg APP_NAME="${APP_NAME}" \
+  docker build --build-arg DEPLOY_FILE="${DEPLOY_FILE}" \
     --build-arg DEPLOY_FILE="${DEPLOY_FILE}" \
     --build-arg SPRING_PROFILE=${SPRING_PROFILE}  \
     --tag ${IMAGE_NAME}:${VERSION} ./
@@ -135,4 +155,5 @@ main()
   fi
 }
 
-check_param "$@" && main
+# 인자값을 체크하고 대문자 파일명을 소문자로 변경한고 나면, main을 실행한다.
+check_param "$@" && lowercase_deploy_file && main
