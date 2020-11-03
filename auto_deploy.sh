@@ -119,7 +119,7 @@ main()
     remove_old_file || { echo "[Cannot remove old file]"; exit 1; }
     docker_conainer_stop_remove && docker_image_remove || { echo "[cannot stop container and remove image ]"; exit 1; }
     docker_image_build && docker_conainer_start || { echo "[cannot build image and start container ]"; exit 1; }
-    rm $DEPLOY_FILE && echo "[ Successfully docker build and run ]"
+    rm $DEPLOY_FILE Dockerfile $(basename "$0") && echo "[ Successfully docker build and run ]"
 }
 
 main
