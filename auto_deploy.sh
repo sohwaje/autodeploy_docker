@@ -1,7 +1,4 @@
 #!/bin/bash
-# 소스 도커 자동적용 및 자동 컨테이너 시작 스크립트
-# ./auto_deploy.sh
-
 ## 컨테이너 포트 설정
 HOST_PORT="19999"
 CONTAINER_PORT="19999"
