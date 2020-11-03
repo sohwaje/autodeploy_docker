@@ -1,5 +1,7 @@
 package com.docker.example.hello.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +11,6 @@ public class HelloController {
 
   @RequestMapping("/")
   public String hello() {
-    logger.info("이거?");
     return "Hello, yusung yo!!!!!";
   }
 }
