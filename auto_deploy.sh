@@ -106,7 +106,7 @@ docker_conainer_start()
   echo "Run docker container"
   docker run -itd -p $HOST_PORT:$CONTAINER_PORT \
     --name ${IMAGE_NAME} \
-    -v $APP_HOME/logs:/logs \
+    # -v $APP_HOME/logs:/logs \
     -v $APP_HOME/heapdump:/heapdump:rw \
     -v /etc/localtime:/etc/localtime:ro \
     -e TZ=Asia/Seoul ${IMAGE_NAME}:${VERSION}
