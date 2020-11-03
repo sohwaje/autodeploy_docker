@@ -3,7 +3,7 @@ FROM openjdk:8-jre-alpine
 ARG DEPLOY_FILE
 ARG SPRING_PROFILE
 
-# variable이 만일 정의가 안되어 있으면 word 부분의 값이 사용된다.
+# variable이 만일 정의가 안되어 있으면 ${} 부분의 값이 사용된다.
 ENV DEPLOY_FILE=${DEPLOY_FILE:-deploy.jar}
 ENV SPRING_PROFILE=${SPRING_PROFILE:-dev}
 
