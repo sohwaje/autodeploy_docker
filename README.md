@@ -1,5 +1,5 @@
 # Auto-deploy Springboot to Jenkins using Docker and Bash
-*notice*
+**notice**
 - This repository contains sample sources.
 - This document uses springboot sources for samples.
 
@@ -25,7 +25,7 @@
 
 ### 3-3 Environment Build
 ![Alt text](/readme-img/env-build.JPG)
-*important*
+**important**
 ```bash
   cd ~/apps
   wget https://raw.githubusercontent.com/sohwaje/autodeploy_docker/main/Dockerfile
