@@ -53,4 +53,4 @@
   > HOST_PORT="19999"  
   > CONTAINER_PORT="19999"
 
-- Also you can edit **APP_HOME, VERSION, SPRING_PROFILE**
+- Also you can edit **APP_HOME, VERSION, SPRING_PROFILE**, and anything possible
