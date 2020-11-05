@@ -1,4 +1,7 @@
 # Auto-deploy Springboot to Jenkins using Docker and Bash
+*notice*
+- This repository contains sample sources.
+- This document uses springboot sources for samples.
 
 ![Alt text](/readme-img/build-image.JPG)
 
@@ -13,4 +16,12 @@
   sudo systemctl start docker
 ```
 
-## 3. Jenkins Settings
+## 3. Jenkins Settings(brief explanation)
+### 3-1 Source Code Management
+![Alt text](/readme-img/manage-source-code.JPG)
+
+### 3-2 Build trigger
+![Alt text](/readme-img/build-trigger.JPG)
+
+### 3-3 Environment Build
+![Alt text](/readme-img/env-build.JPG)
