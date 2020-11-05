@@ -38,11 +38,11 @@
 ![Alt text](readme-img/build-go.JPG)
 
 ### 3-5 Build Now
-![Alt text](readme-img\Build-now.JPG)
+![Alt text](readme-img/Build-now.JPG)
 
 ## 4. After deploy
 + The **logs** directory and **heapdump** directory are created in **apps** dir  
-![Alt text](readme-img\vm-deploy.JPG)
+![Alt text](readme-img/vm-deploy.JPG)
 
 ### 4-1 Docker container
-![Alt text](readme-img\container.JPG)
+![Alt text](readme-img/container.JPG)
