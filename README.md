@@ -18,10 +18,10 @@
 
 ## 3. Jenkins Settings(brief explanation)
 ### 3-1 Source Code Management
-![Alt text](/readme-img/manage-source-code.JPG)
+![Alt text](/readme-img/manage-source-code.jpg)
 
 ### 3-2 Build trigger
-![Alt text](/readme-img/build-trigger.JPG)
+![Alt text](/readme-img/build-trigger.jpg)
 
 ### 3-3 Environment Build
 ![Alt text](/readme-img/env-build.JPG)
