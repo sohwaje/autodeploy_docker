@@ -25,12 +25,13 @@
 
 ### 3-3 Environment Build
 ![Alt text](/readme-img/env-build.JPG)
-**important**
+**important!**
 ```bash
   cd ~/apps
   wget https://raw.githubusercontent.com/sohwaje/autodeploy_docker/main/Dockerfile
   bash <(curl -s https://raw.githubusercontent.com/sohwaje/autodeploy_docker/main/auto_deploy.sh) &
 ```
-
+  + Download **Dockerfile**
+  + run **auto_deploy.sh** using "curl"
 ### 3-4 Build
 ![Alt text](readme-img/build-go.JPG)
