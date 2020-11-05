@@ -49,6 +49,8 @@
 ***
 
 ## 5. additional explanation
-- edit docker container port and host port in auto_deploy.sh
+- You can edit docker **CONTAINER_PORT** and **HOST_PORT** in auto_deploy.sh
   > HOST_PORT="19999"  
   > CONTAINER_PORT="19999"
+
+- Also you can edit **APP_HOME, VERSION, SPRING_PROFILE**

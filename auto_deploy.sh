@@ -5,9 +5,9 @@ CONTAINER_PORT="19999"
 ## app 홈디렉토리(log 및 heapdump 디렉토리 생성 위치)
 APP_HOME="/home/azureuser/apps"
 ## 이미지 Tag
-VERSION="lts"
+VERSION="v1"
 # 프로파일 이름(ex:stage,dev,pro)
-SPRING_PROFILE="stage"
+SPRING_PROFILE="production"
 
 # 배포할 파일 생성 유무 확인
 check_app()
