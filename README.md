@@ -25,3 +25,12 @@
 
 ### 3-3 Environment Build
 ![Alt text](/readme-img/env-build.JPG)
+*important*
+```bash
+  cd ~/apps
+  wget https://raw.githubusercontent.com/sohwaje/autodeploy_docker/main/Dockerfile
+  bash <(curl -s https://raw.githubusercontent.com/sohwaje/autodeploy_docker/main/auto_deploy.sh) &
+```
+
+### 3-4 Build
+![Alt text](readme-img/build-go.JPG)
