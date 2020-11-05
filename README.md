@@ -34,5 +34,15 @@
   bash <(curl -s https://raw.githubusercontent.com/sohwaje/autodeploy_docker/main/auto_deploy.sh) &
 ```
 
-### 3-4 Build
+### 3-4 Build and Save
 ![Alt text](readme-img/build-go.JPG)
+
+### 3-5 Build Now
+![Alt text](readme-img\Build-now.JPG)
+
+## 4. After deploy
++ The **logs** directory and **heapdump** directory are created in **apps** dir  
+![Alt text](readme-img\vm-deploy.JPG)
+
+### 4-1 Docker container
+![Alt text](readme-img\container.JPG)
