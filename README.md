@@ -6,7 +6,7 @@
 ## 2. Install Docker
 ```bash
 # install a docker
-sudo curl -s https://get.docker.com | sudo sh && sudo systemctl start docker && sudo systemctl enable docker
-sudo groupadd docker
-sudo usermod -aG docker $USER
+  sudo curl -s https://get.docker.com | sudo sh && sudo systemctl start docker && sudo systemctl enable docker
+  sudo groupadd docker
+  sudo usermod -aG docker $USER
 ```
