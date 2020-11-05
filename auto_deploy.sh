@@ -2,7 +2,7 @@
 ## 컨테이너 포트 설정
 HOST_PORT="19999"
 CONTAINER_PORT="19999"
-## app 홈디렉토리(log 및 heapdump 디렉토리 생성 위치)
+## app 홈디렉토리(log 및 heapdump 디렉토리 생성 위치):생성되어 있어야 함.
 APP_HOME="/home/azureuser/apps"
 ## 이미지 Tag
 VERSION="v1"
