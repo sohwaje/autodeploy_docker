@@ -46,3 +46,9 @@
 
 ### 4-1 Docker container
 ![Alt text](readme-img/container.JPG)
+***
+
+## 5. additional explanation
+- edit docker container port and host port in auto_deploy.sh
+  > HOST_PORT="19999"
+  > CONTAINER_PORT="19999"
