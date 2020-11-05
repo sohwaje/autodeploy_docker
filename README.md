@@ -1,6 +1,6 @@
 # Auto-deploy Springboot to Jenkins using Docker and Bash
 
-![Alt text](/readme-img/build-image.JPS)
+![Alt text](/readme-img/build-image.JPG)
 
 ## 1. Install Jenkins
 - https://www.server-world.info/en/note?os=CentOS_7&p=jenkins
