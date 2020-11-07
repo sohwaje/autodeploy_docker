@@ -15,7 +15,7 @@ check_app()
   if [[ -f ${APP_HOME}/${DEPLOY_FILE} ]];then
     return 0
   else
-    echo "Deploy file Dose not exist in $APP_HOME"
+    echo "Deploy file or directory Dose not exist in $APP_HOME"
     exit 1
   fi
 }
