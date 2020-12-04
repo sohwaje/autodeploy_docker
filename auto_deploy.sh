@@ -102,7 +102,8 @@ docker_conainer_start()
 {
   echo "Run docker container"
   docker run -itd -p $HOST_PORT:$CONTAINER_PORT \
-    --name ${IMAGE_NAME} \
+    # --name ${IMAGE_NAME} \
+    --name backend \  # nginx의 proxypass 설정과 맞춤.
     -v $APP_HOME/logs:/logs \
     -v $APP_HOME/heapdump:/heapdump:rw \
     -v /etc/localtime:/etc/localtime:ro \
