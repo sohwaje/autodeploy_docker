@@ -32,7 +32,8 @@ variable_func()
 # 파일명에서 확장자를 제거한 문자열을 서비스 이름으로 사용.
   SERVICE_NAME=$(echo ${DEPLOY_FILE%.*})
 # 도커 이미지 이름
-  IMAGE_NAME="${SERVICE_NAME}-${SPRING_PROFILE}"
+  # IMAGE_NAME="${SERVICE_NAME}-${SPRING_PROFILE}"
+IMAGE_NAME="backend"
 # 도커 관련 변수
   CONTAINER_ID=$(docker ps -af ancestor=${IMAGE_NAME}:${VERSION} --format "{{.ID}}")
   IMAGE_ID=$(docker images -f=reference=${IMAGE_NAME}':*' --format "{{.ID}}")
@@ -102,8 +103,7 @@ docker_conainer_start()
 {
   echo "Run docker container"
   docker run -itd -p $HOST_PORT:$CONTAINER_PORT \
-    # --name ${IMAGE_NAME} \
-    --name backend \  # nginx의 proxypass 설정과 맞춤.
+    --name ${IMAGE_NAME} \
     -v $APP_HOME/logs:/logs \
     -v $APP_HOME/heapdump:/heapdump:rw \
     -v /etc/localtime:/etc/localtime:ro \
