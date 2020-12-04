@@ -8,7 +8,8 @@ APP_HOME="/home/azureuser/apps"
 VERSION="v1"
 # 프로파일 이름(ex:stage,dev,pro)
 SPRING_PROFILE="production"
-
+# 도커 네트워크
+DOCKER_NETWORK="production"
 # 배포할 파일 생성 유무 확인
 check_app()
 {
@@ -104,6 +105,7 @@ docker_conainer_start()
   echo "Run docker container"
   docker run -itd -p $HOST_PORT:$CONTAINER_PORT \
     --name ${IMAGE_NAME} \
+    --network $DOCKER_NETWORK
     -v $APP_HOME/logs:/logs \
     -v $APP_HOME/heapdump:/heapdump:rw \
     -v /etc/localtime:/etc/localtime:ro \
