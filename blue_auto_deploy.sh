@@ -5,11 +5,13 @@ CONTAINER_PORT="8080"
 ## app 홈디렉토리(log 및 heapdump 디렉토리 생성 위치):생성되어 있어야 함.
 APP_HOME="/home/azureuser/apps"
 ## 이미지 Tag
-VERSION="v1"
+VERSION="v2"
 # 프로파일 이름(ex:stage,dev,pro)
 SPRING_PROFILE="production"
 # 도커 네트워크
 DOCKER_NETWORK="production_network"
+# 도커 이미지 이름
+IMG_NAME="backend-blue"
 # 배포할 파일 생성 유무 확인
 check_app()
 {
@@ -34,7 +36,7 @@ variable_func()
   SERVICE_NAME=$(echo ${DEPLOY_FILE%.*})
 # 도커 이미지 이름
   # IMAGE_NAME="${SERVICE_NAME}-${SPRING_PROFILE}"
-  IMAGE_NAME="backend"
+  IMAGE_NAME=$IMG_NAME
 # 도커 관련 변수
   CONTAINER_ID=$(docker ps -af ancestor=${IMAGE_NAME}:${VERSION} --format "{{.ID}}")
   IMAGE_ID=$(docker images -f=reference=${IMAGE_NAME}':*' --format "{{.ID}}")
